@@ -76,10 +76,10 @@ variable "resource_name_templates" {
     nat_gateway_public_ip_name            = "pip-nat-$${workload}-$${environment}-$${location}-$${sequence}"
     storage_account_name                  = "sto$${workload}$${environment}$${location_short}$${sequence}$${uniqueness}"
     storage_account_private_endpoint_name = "pe-sto-$${workload}-$${environment}-$${location}-$${sequence}"
-    agent_compute_postfix_name            = "$${workload}-$${environment}-$${location}-$${sequence}"
+    agent_compute_postfix_name            = "$${workload}-$${environment}-$${location_short}-$${sequence}"
     container_instance_prefix_name        = "aci-$${workload}-$${environment}-$${location}"
     container_registry_name               = "acr$${workload}$${environment}$${location}$${sequence}$${uniqueness}"
-    project_name                          = "$${workload}-$${environment}"
+    project_name                          = "$${azure_devops_project}"
     repository_main_name                  = "$${workload}-$${environment}-main"
     repository_template_name              = "$${workload}-$${environment}-template"
     agent_pool_name                       = "agent-pool-$${workload}-$${environment}"
@@ -101,17 +101,6 @@ variable "environments" {
     dev = {
       display_order = 1
       display_name  = "Development"
-    }
-    test = {
-      display_order         = 2
-      display_name          = "Test"
-      dependent_environment = "dev"
-    }
-    prod = {
-      display_order         = 3
-      display_name          = "Production"
-      has_approval          = true
-      dependent_environment = "test"
     }
   }
 }
