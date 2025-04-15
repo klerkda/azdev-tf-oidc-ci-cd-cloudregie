@@ -9,7 +9,8 @@ data "azuredevops_users" "this" {
   principal_name = each.value
   lifecycle {
     postcondition {
-      condition     = length(self.users) > 0
+      #condition     = length(self.users) > 0
+      condition     = length(each.value) > 0
       error_message = "No user account found for ${each.value}, check you have entered a valid user principal name..."
     }
   }
