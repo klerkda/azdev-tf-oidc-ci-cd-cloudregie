@@ -70,7 +70,7 @@ variable "resource_name_templates" {
     resource_group_state_name             = "rg-$${workload}-state-$${environment}-$${location}-$${sequence}"
     resource_group_agents_name            = "rg-$${workload}-agents-$${environment}-$${location}-$${sequence}"
     resource_group_identity_name          = "rg-$${workload}-identity-$${environment}-$${location}-$${sequence}"
-    virtual_network_name                  = "vnet-$${workload}-$${environment}-$${location}-$${sequence}"
+    virtual_network_name                  = "PR-CLRP-VNET01"
     network_security_group_name           = "nsg-$${workload}-$${environment}-$${location}-$${sequence}"
     nat_gateway_name                      = "nat-$${workload}-$${environment}-$${location}-$${sequence}"
     nat_gateway_public_ip_name            = "pip-nat-$${workload}-$${environment}-$${location}-$${sequence}"

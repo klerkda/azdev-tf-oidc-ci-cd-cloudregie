@@ -11,7 +11,7 @@ module "private_dns_zone_storage_account" {
   virtual_network_links = {
     vnet_link = {
       vnetlinkname = "storage-account"
-      vnetid       = module.virtual_network[0].resource_id
+      vnetid       = data.azurerm_virtual_network.virtual_network.id
     }
   }
 }
@@ -47,7 +47,7 @@ module "storage_account" {
   private_endpoints_manage_dns_zone_group = true
   private_endpoints = var.use_self_hosted_agents ? { blob = {
     name                          = local.resource_names.storage_account_private_endpoint_name
-    subnet_resource_id            = module.virtual_network[0].subnets["private_endpoints"].resource_id
+    subnet_resource_id            = data.azurerm_subnet.private_endpoints.id
     subresource_name              = "blob"
     private_dns_zone_resource_ids = [module.private_dns_zone_storage_account[0].resource_id]
     }

@@ -18,10 +18,10 @@ module "azure_devops_agents" {
   version_control_system_organization           = local.organization_name_url
   version_control_system_pool_name              = azuredevops_agent_pool.this[0].name
   virtual_network_creation_enabled              = false
-  virtual_network_id                            = module.virtual_network[0].resource_id
-  container_app_subnet_id                       = module.virtual_network[0].subnets["agents"].resource_id
-  container_instance_subnet_id                  = module.virtual_network[0].subnets["agents"].resource_id
-  container_registry_private_endpoint_subnet_id = module.virtual_network[0].subnets["private_endpoints"].resource_id
+  virtual_network_id                            = data.azurerm_virtual_network.virtual_network.id
+  container_app_subnet_id                       = data.azurerm_subnet.agents.id
+  container_instance_subnet_id                  = data.azurerm_subnet.agents.id
+  container_registry_private_endpoint_subnet_id = data.azurerm_subnet.private_endpoints.id
   container_instance_use_availability_zones     = var.agent_use_availability_zones
   depends_on                                    = [azuredevops_pipeline_authorization.service_connection, azuredevops_pipeline_authorization.environment, azuredevops_pipeline_authorization.agent_pool]
 }
