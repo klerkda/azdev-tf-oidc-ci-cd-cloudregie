@@ -1,20 +1,22 @@
-module "private_dns_zone_storage_account" {
-  source           = "Azure/avm-res-network-privatednszone/azurerm"
-  version          = "0.3.2"
-  enable_telemetry = false
+#module "private_dns_zone_storage_account" {
+#  source           = "Azure/avm-res-network-privatednszone/azurerm"
+#  version          = "0.3.2"
+#  enable_telemetry = false
 
-  count = var.use_self_hosted_agents ? 1 : 0
+#  count = var.use_self_hosted_agents ? 1 : 0
 
-  resource_group_name = module.resource_group["state"].name
-  domain_name         = "privatelink.blob.core.windows.net"
+#  resource_group_name = module.resource_group["state"].name
+#  domain_name         = "privatelink.blob.core.windows.net"
 
-  virtual_network_links = {
-    vnet_link = {
-      vnetlinkname = "storage-account"
-      vnetid       = data.azurerm_virtual_network.virtual_network.id
-    }
-  }
-}
+#  virtual_network_links = {
+#    vnet_link = {
+#      vnetlinkname = "storage-account"
+#      vnetid       = data.azurerm_virtual_network.virtual_network.id
+#    }
+#  }
+#}
+
+
 
 module "storage_account" {
   source                        = "Azure/avm-res-storage-storageaccount/azurerm"
@@ -45,11 +47,14 @@ module "storage_account" {
   }
 
   private_endpoints_manage_dns_zone_group = true
+  #private_endpoints_manage_dns_zone_group = false
+  #private_endpoints                       = {}
   private_endpoints = var.use_self_hosted_agents ? { blob = {
-    name                          = local.resource_names.storage_account_private_endpoint_name
-    subnet_resource_id            = data.azurerm_subnet.private_endpoints.id
-    subresource_name              = "blob"
-    private_dns_zone_resource_ids = [module.private_dns_zone_storage_account[0].resource_id]
+    name               = local.resource_names.storage_account_private_endpoint_name
+    subnet_resource_id = data.azurerm_subnet.private_endpoints.id
+    subresource_name   = "blob"
+    #private_dns_zone_resource_ids = [module.private_dns_zone_storage_account[0].resource_id]
+    private_dns_zone_resource_ids = ["/subscriptions/ca62ca0d-9bb0-4ce4-bed9-26a79b99e796/resourceGroups/pr-plc-dns-zones/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"]
     }
   } : {}
 }

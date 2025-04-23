@@ -82,7 +82,7 @@ variable "resource_name_templates" {
     project_name                          = "$${azure_devops_project}"
     repository_main_name                  = "$${workload}-$${environment}-main"
     repository_template_name              = "$${workload}-$${environment}-template"
-    agent_pool_name                       = "agent-pool-$${workload}-$${environment}"
+    agent_pool_name                       = "agent-pool-$${workload}-$${environment}-pr"
     group_name                            = "group-$${workload}-$${environment}-approvers"
   }
 }
