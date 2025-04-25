@@ -21,9 +21,11 @@ module "azure_devops_agents" {
   virtual_network_id                                   = data.azurerm_virtual_network.virtual_network.id
   container_app_subnet_id                              = data.azurerm_subnet.agents.id
   container_instance_subnet_id                         = data.azurerm_subnet.agents.id
-  use_private_networking                               = false
+  use_private_networking                               = true
   container_registry_private_dns_zone_creation_enabled = false
+  container_registry_dns_zone_id                       = "/subscriptions/ca62ca0d-9bb0-4ce4-bed9-26a79b99e796/resourceGroups/pr-plc-dns-zones/providers/Microsoft.Network/privateDnsZones/privatelink.azconfig.io"
   container_registry_private_endpoint_subnet_id        = data.azurerm_subnet.private_endpoints.id
   container_instance_use_availability_zones            = var.agent_use_availability_zones
   depends_on                                           = [azuredevops_pipeline_authorization.service_connection, azuredevops_pipeline_authorization.environment, azuredevops_pipeline_authorization.agent_pool]
 }
+
