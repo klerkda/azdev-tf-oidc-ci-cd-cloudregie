@@ -101,7 +101,16 @@ variable "environments" {
     dev = {
       display_order = 1
       display_name  = "Development"
-    }
+    },
+    devops = {
+      display_order = 2
+      display_name  = "Azure Devops"
+    },
+    entraid = {
+      display_order = 3
+      display_name  = "Entra Id"
+    },
+
   }
 }
 
