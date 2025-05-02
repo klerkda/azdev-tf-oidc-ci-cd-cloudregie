@@ -183,3 +183,9 @@ variable "agent_use_availability_zones" {
   default     = false
   description = "Use availability zones for the agent pool if using contaienr instances. This is off by default due to faults in various regions at time of authoring."
 }
+
+variable "container_instance_count" {
+  type        = number
+  default     = 2
+  description = "Number of agents in the agentpool"
+}
