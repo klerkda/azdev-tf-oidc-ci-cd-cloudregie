@@ -70,7 +70,7 @@ variable "resource_name_templates" {
     resource_group_state_name             = "rg-$${workload}-state-$${environment}-$${location}-$${sequence}"
     resource_group_agents_name            = "rg-$${workload}-agents-$${environment}-$${location}-$${sequence}"
     resource_group_identity_name          = "rg-$${workload}-identity-$${environment}-$${location}-$${sequence}"
-    virtual_network_name                  = "PR-CLRP-VNET01"
+    virtual_network_name                  = "PR-Lighthouse-VNET01"
     network_security_group_name           = "nsg-$${workload}-$${environment}-$${location}-$${sequence}"
     nat_gateway_name                      = "nat-$${workload}-$${environment}-$${location}-$${sequence}"
     nat_gateway_public_ip_name            = "pip-nat-$${workload}-$${environment}-$${location}-$${sequence}"
@@ -102,14 +102,22 @@ variable "environments" {
       display_order = 1
       display_name  = "Development"
     },
-    devops = {
-      display_order = 2
-      display_name  = "Azure Devops"
+    test = {
+      display_order         = 2
+      display_name          = "Test"
+      dependent_environment = "dev"
     },
-    entraid = {
-      display_order = 3
-      display_name  = "Entra Id"
+    acc = {
+      display_order         = 2
+      display_name          = "Acceptance"
+      dependent_environment = "test"
     },
+    prod = {
+      display_order         = 3
+      display_name          = "Production"
+      has_approval          = true
+      dependent_environment = "acc"
+    }
 
   }
 }
