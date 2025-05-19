@@ -222,3 +222,4 @@ variable "nat_gateway_creation_enabled" {
   default     = false
   description = "Create a NAT Gateway for the VNet"
 }
+
