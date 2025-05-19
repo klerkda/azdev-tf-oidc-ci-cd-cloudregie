@@ -79,7 +79,7 @@ stages:
                       show `
                       tfplan
                     displayName: Show the Plan for Review
-    
+
   - ${{ if or(eq(environment.name, parameters.environment), eq(parameters.environment, 'All')) }}:
     - stage: ${{ environment.name }}_apply
       displayName: ${{environment.display_name }} Apply

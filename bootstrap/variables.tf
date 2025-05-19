@@ -198,3 +198,27 @@ variable "container_instance_count" {
   default     = 2
   description = "Number of agents in the agentpool"
 }
+
+variable "container_instance_container_cpu" {
+  type        = number
+  default     = 1
+  description = "The CPU value for the container instance"
+}
+
+variable "container_instance_container_memory" {
+  type        = number
+  default     = 2
+  description = "The memory value for the container instance"
+}
+
+variable "container_instance_use_availability_zones" {
+  type        = bool
+  default     = false
+  description = "Use availability zones for the container instance."
+}
+
+variable "nat_gateway_creation_enabled" {
+  type        = bool
+  default     = false
+  description = "Create a NAT Gateway for the VNet"
+}

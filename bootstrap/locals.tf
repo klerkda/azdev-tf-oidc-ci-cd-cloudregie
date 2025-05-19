@@ -8,6 +8,7 @@ locals {
     location_short       = var.resource_name_location_short == "" ? module.regions.regions_by_name[var.location].geo_code : var.resource_name_location_short
     uniqueness           = random_string.unique_name.id
     sequence             = format("%03d", var.resource_name_sequence_start)
+    organization_name    = var.organization_name
   }
 
   resource_names = { for key, value in var.resource_name_templates : key => templatestring(value, local.name_replacements) }

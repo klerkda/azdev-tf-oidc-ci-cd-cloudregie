@@ -89,7 +89,7 @@ stages:
                         }
                         $items[$key]++
                       }
-                      
+
                       Write-Host "Plan Summary"
                       Write-Host (ConvertTo-Json $items -Depth 10)
                     displayName: Terraform Plan Summary

@@ -4,7 +4,7 @@ parameters:
     default: 'latest'
 
 steps:
-  - pwsh: | 
+  - pwsh: |
       $TF_VERSION = $env:TF_VERSION
       $TOOLS_PATH = $env:TOOLS_PATH
 
